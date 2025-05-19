@@ -56,6 +56,16 @@ DiscountPercentage
 Place
 ```
 
+## Screenshots
+### 📋 Employer List Screen
+![Employer List](assets/employer_list_screen.png)
+
+### 📄 Employer Detail Screen
+![Employer Detail Screen](assets/employer_detail_screen.png)
+
+### ⚠️ No result Found
+![No result Found](assets/empty_state.png)
+
 ## Tech Stack
 - Kotlin
 - Jetpack Compose
