@@ -62,6 +62,14 @@ android {
     buildFeatures {
         compose = true
     }
+
+    packaging {
+        resources {
+            excludes += "/META-INF/{AL2.0,LGPL2.1}"
+            merges += "META-INF/LICENSE.md"
+            merges += "META-INF/LICENSE-notice.md"
+        }
+    }
 }
 
 dependencies {
@@ -91,5 +99,9 @@ dependencies {
     implementation(libs.retrofit)
     implementation(libs.converter.gson)
     implementation(libs.logging.interceptor)
+
+    androidTestImplementation(libs.kotlinx.coroutines.test)
+    androidTestImplementation(libs.kotlin.test)
+    androidTestImplementation(libs.mockk)
 
 }
