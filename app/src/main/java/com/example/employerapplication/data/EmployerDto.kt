@@ -7,7 +7,7 @@ import com.google.gson.annotations.SerializedName
  */
 data class EmployerDto(
     @SerializedName("Name") val employerName: String,
-    @SerializedName("Id") val employerId: Int,
+    @SerializedName("EmployerID") val employerId: Int,
     @SerializedName("DiscountPercentage") val discountPercentage: Double,
     @SerializedName("Place") val employerPlace: String
 )

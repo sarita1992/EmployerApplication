@@ -8,8 +8,11 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 
 /**
@@ -22,12 +25,29 @@ object AppModule {
     @Provides
     fun provideBaseUrl() = BuildConfig.API_URL
 
+    fun createHttpClient(): OkHttpClient {
+
+        /**
+         * Creates client for retrofit, here you can configure different settings of retrofit manager
+         * like Logging, Cache size, Decoding factories, Convertor factories etc.
+         */
+        val interceptor = HttpLoggingInterceptor()
+        interceptor.level =
+            if (BuildConfig.DEBUG) HttpLoggingInterceptor.Level.BODY else HttpLoggingInterceptor.Level.NONE
+        val client = OkHttpClient.Builder()
+        client.readTimeout(5 * 60, TimeUnit.SECONDS)
+        client.addInterceptor(interceptor)
+        return client.build()
+    }
+
     @Provides
     @Singleton
     fun provideApi(baseUrl: String): EmployerApiService {
-        return Retrofit.Builder()
+
+              return Retrofit.Builder()
             .baseUrl(baseUrl)
             .addConverterFactory(GsonConverterFactory.create())
+            .client(createHttpClient())
             .build()
             .create(EmployerApiService::class.java)
     }
