@@ -6,9 +6,12 @@ plugins {
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
     alias(libs.plugins.hilt)
-    kotlin("kapt")
-}
+    id("org.jetbrains.kotlin.kapt")
 
+}
+hilt {
+    enableAggregatingTask = false
+}
 android {
     namespace = "com.example.employerapplication"
     compileSdk = 35
@@ -88,8 +91,4 @@ dependencies {
     implementation(libs.retrofit)
     implementation(libs.converter.gson)
 
-}
-
-kapt {
-    correctErrorTypes = true
 }
